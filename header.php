@@ -13,7 +13,7 @@ if (session_status() == PHP_SESSION_NONE) {
 <body>
 
 <header>
-    <a href="index.php" style="text-decoration: none; color: inherit;">
+    <a href="index.php">
         <h1>CMS</h1>
     </a>
     <div>

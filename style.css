@@ -9,3 +9,7 @@ footer {
     padding: 15px;
     background-color: #f2f2f2;
 }
+header a {
+    text-decoration: none;
+    color: inherit;
+}

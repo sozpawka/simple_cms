@@ -1,18 +1,9 @@
-/* =========================
-   BASE
-========================= */
-
 body {
     background: #f6f7fb;
     font-family: Arial, sans-serif;
     margin: 0;
     color: #222;
 }
-
-/* =========================
-   HEADER / FOOTER
-========================= */
-
 header,
 footer {
     background: #fff;
@@ -36,11 +27,6 @@ header a {
     text-decoration: none;
     color: #222;
 }
-
-/* =========================
-   LAYOUT
-========================= */
-
 .container {
     max-width: 1100px;
     margin: 20px auto;
@@ -52,11 +38,6 @@ hr {
     border-top: 1px solid #e6e6e6;
     margin: 25px 0;
 }
-
-/* =========================
-   NAV
-========================= */
-
 nav {
     margin-bottom: 20px;
 }
@@ -81,11 +62,6 @@ nav a:hover {
 nav a:active {
     transform: translateY(0px);
 }
-
-/* =========================
-   BUTTONS (ОБЩИЕ)
-========================= */
-
 button,
 input[type="submit"] {
     padding: 10px 16px;
@@ -108,11 +84,6 @@ input[type="submit"]:active {
     background: #1f4fb3;
     transform: scale(0.98);
 }
-
-/* =========================
-   INPUTS
-========================= */
-
 input,
 textarea,
 select {
@@ -131,11 +102,6 @@ textarea:focus,
 select:focus {
     border-color: #2f6fed;
 }
-
-/* =========================
-   NEWS CARD
-========================= */
-
 .news-card {
     background: #fff;
     padding: 20px;
@@ -149,11 +115,6 @@ select:focus {
     border-radius: 8px;
     margin: 10px 0;
 }
-
-/* =========================
-   TABLES
-========================= */
-
 table {
     width: 100%;
     border-collapse: collapse;
@@ -173,11 +134,6 @@ td {
     border-bottom: 1px solid #eee;
     text-align: left;
 }
-
-/* =========================
-   LINKS INSIDE CONTENT
-========================= */
-
 a {
     color: #2f6fed;
 }
@@ -185,11 +141,6 @@ a {
 a:hover {
     opacity: 0.8;
 }
-
-/* =========================
-   LOGOUT BUTTON (ВАЖНО)
-========================= */
-
 .logout {
     margin-left: 15px;
     padding: 8px 12px;
@@ -209,4 +160,70 @@ a:hover {
     background: #ff9b9b;
     color: #fff !important;
     transform: scale(0.97);
+}
+.form-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 10px;
+}
+button,
+a.btn {
+    display: inline-block;
+    padding: 10px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+button {
+    background: #2f6fed;
+    color: #fff;
+}
+
+button:hover {
+    background: #255cd1;
+}
+
+button:active {
+    transform: scale(0.97);
+}
+.btn-reset {
+    background: #f5f5f5;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.btn-reset:hover {
+    background: #e9e9e9;
+}
+.btn-export {
+    background: #eaf2ff;
+    color: #2f6fed;
+    border: 1px solid #cfe0ff;
+}
+
+.btn-export:hover {
+    background: #dbe9ff;
+}
+.btn-danger {
+    background: #ffe5e5;
+    color: #b10000;
+    border: 1px solid #ffcccc;
+}
+
+.btn-danger:hover {
+    background: #ffcccc;
+    color: #a00000;
+}
+
+.btn-danger:active {
+    background: #ff9b9b;
+    color: #fff;
+    transform: scale(0.97);
+}
+a {
+    text-decoration: none;
 }

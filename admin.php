@@ -97,13 +97,14 @@ include 'header.php';
 
         </table>
 
-        <p>
-            <a href="export_logs.php?user_id=<?= $userId ?>">Экспорт</a>
-            |
-            <a href="admin.php?clear_user=<?= $userId ?>" onclick="return confirm('Удалить логи?')">
+        <div class="form-actions">
+            <a class="btn btn-export" href="export_logs.php?user_id=<?= $userId ?>">
+                Экспорт
+            </a>
+            <a class="btn btn-danger" href="admin.php?clear_user=<?= $userId ?>" onclick="return confirm('Удалить логи?')">
                 Очистить
             </a>
-        </p>
+        </div>
 
         <hr>
 

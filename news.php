@@ -1,22 +1,25 @@
 <?php
 
 session_start();
-include 'database.php';
+
+require_once __DIR__ . '/classes/News.php';
+require_once __DIR__ . '/classes/PageLogger.php';
+
+$newsClass = new News();
+
+if (
+    isset($_GET['delete']) &&
+    isset($_SESSION['role_id']) &&
+    $_SESSION['role_id'] == 3
+) {
+    $newsClass->delete((int)$_GET['delete']);
+    header('Location: news.php');
+    exit;
+}
+
+$newsList = $newsClass->getAll();
+
 include 'header.php';
-
-$stmt = $pdo->prepare("
-    SELECT
-        news.*,
-        users.fullName
-    FROM news
-    INNER JOIN users
-        ON news.user_id = users.id
-    ORDER BY news.created_at DESC
-");
-
-$stmt->execute();
-
-$newsList = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -24,44 +27,50 @@ $newsList = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <?php foreach ($newsList as $news): ?>
 
-    <div>
+    <div class="news-card">
 
         <h3>
-            <?= htmlspecialchars($news['title']) ?>
+            <?php echo htmlspecialchars($news['title']); ?>
         </h3>
 
         <p>
-            Автор: <?= htmlspecialchars($news['fullName']) ?>
+            Автор:
+            <?php echo htmlspecialchars($news['fullName']); ?>
         </p>
 
         <?php if (!empty($news['image'])): ?>
 
             <img
-                src="uploads/<?= $news['image'] ?>"
+                src="uploads/<?php echo htmlspecialchars($news['image']); ?>"
                 width="300"
             >
 
         <?php endif; ?>
 
         <p>
-            <?= htmlspecialchars($news['description']) ?>
+            <?php echo htmlspecialchars($news['description']); ?>
         </p>
 
         <p>
-            <?= $news['created_at'] ?>
+            <?php echo $news['created_at']; ?>
         </p>
 
-        <?php
-        if (
+        <?php if (
             isset($_SESSION['user_id']) &&
             $_SESSION['user_id'] == $news['user_id']
-        ):
-        ?>
+        ): ?>
 
-            <a href="news_edit_delete.php?id=<?= $news['id'] ?>"            >
+            <a href="news_edit_delete.php?id=<?php echo $news['id']; ?>">
                 Редактировать
             </a>
 
+        <?php endif; ?>
+
+        <?php if (
+            isset($_SESSION['role_id']) &&
+            $_SESSION['role_id'] == 3
+        ): ?>
+            <a href="news.php?delete=<?php echo $news['id']; ?>" onclick="return confirm('Удалить новость?')">Удалить</a>
         <?php endif; ?>
 
         <hr>

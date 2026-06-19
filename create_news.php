@@ -1,33 +1,24 @@
 <?php
 session_start();
-include 'database.php';
+require_once 'classes/News.php';
+
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header('Location: login.php');
     exit;
 }
+
+$news = new News();
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $title = $_POST['title'];
-    $description = $_POST['description'];
-    $imageName = '';
-    if (!empty($_FILES['image']['name'])) {
-        $imageName = time() . '_' . $_FILES['image']['name'];
-        move_uploaded_file(
-            $_FILES['image']['tmp_name'],
-            'uploads/' . $imageName
-        );
-    }
-    $stmt = $pdo->prepare("
-        INSERT INTO news
-        (user_id, title, image, description)
-        VALUES (?, ?, ?, ?)
-    ");
-    $stmt->execute([
+
+    $news->create(
         $_SESSION['user_id'],
-        $title,
-        $imageName,
-        $description
-    ]);
-    header("Location: news.php");
+        $_POST['title'],
+        $_POST['description'],
+        $_FILES['image']
+    );
+
+    header('Location: news.php');
     exit;
 }
 include 'header.php';
@@ -41,10 +32,7 @@ include 'header.php';
     <p>
         Фото: <input type="file" name="image">
     </p>
-
-    <p>
-        Описание:
-    </p>
+    <p>Описание: </p>
     <textarea
         name="description"
         rows="10"

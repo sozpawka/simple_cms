@@ -1,15 +1,212 @@
+/* =========================
+   BASE
+========================= */
+
 body {
+    background: #f6f7fb;
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 20px;
+    color: #222;
 }
+
+/* =========================
+   HEADER / FOOTER
+========================= */
 
 header,
 footer {
-    padding: 15px;
-    background-color: #f2f2f2;
+    background: #fff;
+    border-bottom: 1px solid #e6e6e6;
+    padding: 15px 30px;
 }
+
+footer {
+    border-top: 1px solid #e6e6e6;
+    border-bottom: none;
+    margin-top: 30px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 header a {
     text-decoration: none;
-    color: inherit;
+    color: #222;
+}
+
+/* =========================
+   LAYOUT
+========================= */
+
+.container {
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #e6e6e6;
+    margin: 25px 0;
+}
+
+/* =========================
+   NAV
+========================= */
+
+nav {
+    margin-bottom: 20px;
+}
+
+nav a {
+    display: inline-block;
+    padding: 9px 14px;
+    margin-right: 10px;
+    text-decoration: none;
+    border-radius: 8px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    color: #222;
+    transition: 0.2s ease;
+}
+
+nav a:hover {
+    background: #f1f3f7;
+    transform: translateY(-1px);
+}
+
+nav a:active {
+    transform: translateY(0px);
+}
+
+/* =========================
+   BUTTONS (ОБЩИЕ)
+========================= */
+
+button,
+input[type="submit"] {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    background: #2f6fed;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.2s ease;
+    font-size: 14px;
+}
+
+button:hover,
+input[type="submit"]:hover {
+    background: #255cd1;
+}
+
+button:active,
+input[type="submit"]:active {
+    background: #1f4fb3;
+    transform: scale(0.98);
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #2f6fed;
+}
+
+/* =========================
+   NEWS CARD
+========================= */
+
+.news-card {
+    background: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+}
+
+.news-card img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+/* =========================
+   TABLES
+========================= */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+}
+
+th {
+    background: #f3f5f9;
+}
+
+th,
+td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+/* =========================
+   LINKS INSIDE CONTENT
+========================= */
+
+a {
+    color: #2f6fed;
+}
+
+a:hover {
+    opacity: 0.8;
+}
+
+/* =========================
+   LOGOUT BUTTON (ВАЖНО)
+========================= */
+
+.logout {
+    margin-left: 15px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: #ffe5e5;
+    color: #b10000 !important;
+    border: 1px solid #ffcccc;
+    transition: 0.2s ease;
+}
+
+.logout:hover {
+    background: #ffcccc;
+    color: #a00000 !important;
+}
+
+.logout:active {
+    background: #ff9b9b;
+    color: #fff !important;
+    transform: scale(0.97);
 }

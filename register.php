@@ -1,5 +1,7 @@
 <?php
-include 'database.php';
+require_once __DIR__ . '/classes/Database.php';
+$database = new Database();
+$pdo = $database->getConnection();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $fullName = $_POST['fullName'];
     $email = $_POST['email'];

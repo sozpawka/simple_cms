@@ -1,28 +1,20 @@
 <?php
 
 session_start();
-include 'database.php';
+
+require_once __DIR__ . '/classes/News.php';
+require_once __DIR__ . '/classes/PageLogger.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header('Location: login.php');
     exit;
 }
 
-if (!isset($_GET['id'])) {
-    die('Не передан ID');
-}
+$newsClass = new News();
 
 $id = (int)$_GET['id'];
 
-$stmt = $pdo->prepare("
-    SELECT *
-    FROM news
-    WHERE id = ?
-");
-
-$stmt->execute([$id]);
-
-$news = $stmt->fetch(PDO::FETCH_ASSOC);
+$news = $newsClass->getById($id);
 
 if (!$news) {
     die('Новость не найдена');
@@ -33,29 +25,23 @@ if ($news['user_id'] != $_SESSION['user_id']) {
 }
 
 if (isset($_POST['update'])) {
-    $title = trim($_POST['title']);
-    $description = trim($_POST['description']);
-    $stmt = $pdo->prepare("
-        UPDATE news
-        SET title = ?, description = ?
-        WHERE id = ?
-    ");
-    $stmt->execute([
-        $title,
-        $description,
-        $id
-    ]);
-    header("Location: news.php");
+
+    $newsClass->update(
+        $id,
+        $_POST['title'],
+        $_POST['description'],
+        $_FILES['image']
+    );
+
+    header('Location: news.php');
     exit;
 }
 
 if (isset($_POST['delete'])) {
-    $stmt = $pdo->prepare("
-        DELETE FROM news
-        WHERE id = ?
-    ");
-    $stmt->execute([$id]);
-    header("Location: news.php");
+
+    $newsClass->delete($id);
+
+    header('Location: news.php');
     exit;
 }
 
@@ -63,15 +49,24 @@ include 'header.php';
 ?>
 
 <h2>Редактирование новости</h2>
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
     <p>
         Заголовок:
         <input
             type="text"
             name="title"
-            value="<?= htmlspecialchars($news['title']) ?>"
+            value="<?php echo htmlspecialchars($news['title']); ?>"
             required
         >
+    </p>
+    <?php if (!empty($news['image'])): ?>
+        <p>
+            <img src="uploads/<?php echo htmlspecialchars($news['image']); ?>" width="300">
+        </p>
+    <?php endif; ?>
+    <p>
+        Новое изображениея:
+        <input type="file" name="image">
     </p>
     <p>Описание:</p>
     <textarea
@@ -79,7 +74,7 @@ include 'header.php';
         rows="10"
         cols="50"
         required
-    ><?= htmlspecialchars($news['description']) ?></textarea>
+    ><?php echo htmlspecialchars($news['description']); ?></textarea>
     <br><br>
     <button type="submit" name="update">
         Сохранить

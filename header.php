@@ -2,6 +2,10 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+require_once __DIR__ . '/classes/PageLogger.php';
+if (isset($_SESSION['user_id'])) {
+    (new PageLogger())->log();
+}
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -19,7 +23,7 @@ if (session_status() == PHP_SESSION_NONE) {
     <div>
         <?php if (isset($_SESSION['user_id'])): ?>
             <span>
-                Привет,<?php echo htmlspecialchars($_SESSION['fullName']); ?>
+                Привет, <?php echo htmlspecialchars($_SESSION['fullName']); ?>
             </span>
             <a class="logout" href="logout.php">Выйти</a>
 
@@ -36,6 +40,9 @@ if (session_status() == PHP_SESSION_NONE) {
         <a href="news.php">Все новости</a>
         <?php if (isset($_SESSION['user_id'])): ?>
             <a href="create_news.php">Создать новость</a>
+            <?php if ($_SESSION['role_id'] == 3): ?>
+                <a href="admin.php">Логи пользователей</a>
+            <?php endif; ?>
         <?php endif; ?>
     </nav>
     <hr>

@@ -1,7 +1,8 @@
 <?php
 session_start();
-require_once 'database.php';
 require_once 'header.php';
+require_once __DIR__ . '/classes/Database.php';
+require_once __DIR__ . '/classes/PageLogger.php';
 ?>
 
 <h2>Главная страница</h2>
